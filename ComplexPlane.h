@@ -2,5 +2,5 @@
 
 #include <iostream>
 
-using namespce std;
+using namespace std;
 
