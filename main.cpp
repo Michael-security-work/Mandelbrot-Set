@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
+	cout << "check" << endl;
 	int pixelWidth = VideoMode::getDesktopMode().width;
 	int pixelHeight = VideoMode::getDesktopMode().height;
 	VideoMode vm(pixelWidth, pixelHeight);
