@@ -1,18 +1,18 @@
-#include <SFML/Graphics.hpp>
-#include <iostream>
-
 #include "ComplexPlane.h"
-
-using namespace sf;
-using namespace std;
 
 int main()
 {
-	cout << "check" << endl;
-	int pixelWidth = VideoMode::getDesktopMode().width;
-	int pixelHeight = VideoMode::getDesktopMode().height;
+	int pixelWidth = VideoMode::getDesktopMode().width - 100;
+	int pixelHeight = VideoMode::getDesktopMode().height - 100;
 	VideoMode vm(pixelWidth, pixelHeight);
 	RenderWindow window(vm, "Rainbow Screen", Style::Default);
+	
+	 Font font;
+	 font.loadFromFile("fonts/DejaVuSansMono.ttf");
+	 
+	 Text text;
+	 text.setFont(font);
+	 text.setFillColor(Color::White);
 
 	while (window.isOpen())
 	{
@@ -20,6 +20,20 @@ int main()
 		Event event;
 		while (window.pollEvent(event))
 		{
+			if (event.type == Event::Closed) window.close();
+			
+			if(event.type == Event::MouseButtonPressed)
+			{
+				if (event.mouseButton.button == Mouse::Left)
+				{
+					
+				}
+				else if (event.mouseButton.button == Mouse::Right)
+				{
+					
+				}
+			}
+			
 			if (Keyboard::isKeyPressed(Keyboard::Escape)) window.close();
 		}
 		///Update
