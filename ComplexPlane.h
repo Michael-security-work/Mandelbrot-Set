@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 using namespace sf;
@@ -18,15 +19,15 @@ class ComplexPlane : public Drawable
 	private:
 		VertexArray m_vArray;
 		State m_state;
-		Vecotro2f m_mouseLocation;
-		Vecotro2i m_pixel_size;
-		Vecotro2f m_plane_center;
-		Vecotro2f m_plane_size;
+		Vector2f m_mouseLocation;
+		Vector2i m_pixel_size;
+		Vector2f m_plane_center;
+		Vector2f m_plane_size;
 		int m_zoomCount;
 		float m_aspectRatio;
 		
 		int countInterations(Vector3f coord);
-		void iterationsToRGB(size_t count, Uint9& r, Uint9& g, Uint9& b);
+		void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b);
 		Vector2f mapPixelToCoords(Vector2i mousePixel);
 		
 	public:
