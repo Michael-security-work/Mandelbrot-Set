@@ -26,7 +26,7 @@ int main()
 			{
 				if (event.mouseButton.button == Mouse::Left)
 				{
-					
+						
 				}
 				else if (event.mouseButton.button == Mouse::Right)
 				{
