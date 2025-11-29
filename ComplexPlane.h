@@ -29,7 +29,7 @@ class ComplexPlane : public Drawable
 		
 		size_t countIterations(Vector2f coord);
 		void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b); //now what? 2
-		//3
+		//sdf3
 		//2
 		Vector2f mapPixelToCoords(Vector2i mousePixel);
 		
