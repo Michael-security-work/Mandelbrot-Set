@@ -28,11 +28,7 @@ class ComplexPlane : public Drawable
 		float m_aspectRatio;
 		
 		size_t countIterations(Vector2f coord);
-<<<<<<< HEAD
 		void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b); //now what? 2
-=======
-		void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b); //now what? 2 
->>>>>>> refs/remotes/origin/main
 		Vector2f mapPixelToCoords(Vector2i mousePixel);
 		
 	public:
