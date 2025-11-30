@@ -37,15 +37,21 @@ int main()
 					
 				}
 			}
+			else if (event.type == Event::MouseMoved)
+			{
+				
+			}
 			
 			if (Keyboard::isKeyPressed(Keyboard::Escape)) window.close();
 		}
 		///Update
+		plane.updateRender();
 		plane.loadText(text);
 
 		///Draw
 		window.clear();
-		//window.draw(...);
+		
+		window.draw(plane);
 		window.draw(text);
 		
 		window.display();
