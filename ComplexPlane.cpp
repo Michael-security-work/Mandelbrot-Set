@@ -20,7 +20,7 @@ void ComplexPlane::updateRender()
 {
 	if (m_state == State::CALCULATING)
 	{
-
+		
 	}
 	m_state = State::DISPLAYING;
 }
@@ -33,13 +33,21 @@ void ComplexPlane::zoomOut()
 }
 void ComplexPlane::setCenter(Vector2i mousePixel)
 {
-	
+	m_plane_center.x = static_cast<float>(mousePixel.x);
+	m_plane_center.y = static_cast<float>(mousePixel.y);
 }
 void ComplexPlane::setMouseLocation(Vector2i mousPixel)
 {
 }
 void ComplexPlane::loadText(Text& text)
 {
+	string s;
+	s += "Mandelbrot Set";
+	s += "\nCenter: (" + to_string(m_mouseLocation.x) + ',' + to_string(m_mouseLocation.y) + ')';
+	s += "\nCursor: (" + to_string(m_plane_center.x) + ',' + to_string(m_plane_center.y) + ')';
+	s += "\nLeft-click to Zoom in";
+	s += "\nRight-click to Zoom out";
+	text.setString(s);
 }
 size_t ComplexPlane::countIterations(Vector2f coord)
 {

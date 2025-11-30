@@ -1,9 +1,11 @@
-#pragma once
+#ifndef COMPLEXPLANE_H_INCLUDED
+#define COMPLEXPLANE_H_INCLUDED
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <complex>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 using namespace sf;
@@ -41,3 +43,5 @@ class ComplexPlane : public Drawable
 		void setMouseLocation(Vector2i mousPixel);
 		void loadText(Text& text);
 };
+
+#endif

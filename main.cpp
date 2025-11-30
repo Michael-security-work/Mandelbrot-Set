@@ -7,12 +7,16 @@ int main()
 	VideoMode vm(pixelWidth, pixelHeight);
 	RenderWindow window(vm, "Rainbow Screen", Style::Default);
 	
-	 Font font;
-	 font.loadFromFile("fonts/DejaVuSansMono.ttf");
+	Font font;
+	font.loadFromFile("fonts/DejaVuSansMono.ttf");
 	 
-	 Text text;
-	 text.setFont(font);
-	 text.setFillColor(Color::White);
+	Text text;
+	text.setFont(font);
+	text.setFillColor(Color::White);
+	text.setCharacterSize(pixelHeight / 35);
+	
+	 
+	ComplexPlane plane(pixelWidth, pixelHeight);
 
 	while (window.isOpen())
 	{
@@ -37,10 +41,12 @@ int main()
 			if (Keyboard::isKeyPressed(Keyboard::Escape)) window.close();
 		}
 		///Update
+		plane.loadText(text);
 
 		///Draw
 		window.clear();
 		//window.draw(...);
+		window.draw(text);
 		
 		window.display();
 
