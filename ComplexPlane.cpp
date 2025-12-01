@@ -104,7 +104,6 @@ void ComplexPlane::updateRender()
 }
 void ComplexPlane::zoomIn()
 {
-	m_plane_center = m_mouseLocation;
 	m_zoomCount++;
 	float x = (float)BASE_WIDTH * (pow(BASE_ZOOM, m_zoomCount));
 	float y = (float)BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
@@ -113,7 +112,6 @@ void ComplexPlane::zoomIn()
 }
 void ComplexPlane::zoomOut()
 {
-	m_plane_center = m_mouseLocation;
 	m_zoomCount--;
 	float x = BASE_WIDTH * (pow(BASE_ZOOM, m_zoomCount));
 	float y = BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
