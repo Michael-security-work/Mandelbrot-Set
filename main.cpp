@@ -15,7 +15,6 @@ int main()
 	text.setFillColor(Color::White);
 	text.setCharacterSize(pixelHeight / 35);
 	
-	 
 	ComplexPlane plane(pixelWidth, pixelHeight);
 
 	while (window.isOpen())

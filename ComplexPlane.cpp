@@ -14,8 +14,9 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 }
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i pixel)
 {
-	
-	return Vector2f(0.f, 0.f);
+	float r = m_plane_center.x + (pixel.x - m_pixel_size.x / 2.0f) * (m_plane_size.x / m_pixel_size.x);
+	float i = m_plane_center.y + (pixel.y - m_pixel_size.y / 2.0f) * (m_plane_size.y / m_pixel_size.y);
+	return Vector2f(r, i);
 }
 void ComplexPlane::draw(RenderTarget& target, RenderStates states) const
 {
@@ -29,7 +30,11 @@ void ComplexPlane::updateRender()
 			for(int i = 0; i < m_pixel_size.y; i++)
 			{
 				Vertex& v = m_vArray[j + i * m_pixel_size.x];
-				v.position = {(float)j, (float)i};
+				v.position = Vector2f((float)j, (float)i);
+				size_t count = countIterations(mapPixelToCoords(Vector2i(j,i)));
+				Uint8 r, g, b;
+				iterationsToRGB(count, r, g, b);
+				v.color = { r, g, b };
 			}
 	}
 	m_state = State::DISPLAYING;
@@ -48,6 +53,7 @@ void ComplexPlane::setCenter(Vector2i mousePixel)
 }
 void ComplexPlane::setMouseLocation(Vector2i mousPixel)
 {
+	m_mouseLocation = mapPixelToCoords(mousPixel);
 }
 void ComplexPlane::loadText(Text& text)
 {
@@ -61,13 +67,27 @@ void ComplexPlane::loadText(Text& text)
 }
 size_t ComplexPlane::countIterations(Vector2f coord)
 {
-	return 0;
+	float x, y, reTemp;
+	int iterations;
+	x = 0; y = 0;
+	iterations = 0;
+
+	while (x * x + y * y < 4 && iterations < MAX_ITER) {
+		reTemp = x * x - y * y + coord.x;
+		y = 2 * x * y + coord.y;
+		x = reTemp;
+		iterations++;
+	}
+	return iterations;
 }
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
-	if (count > 63) { r = 255; g = 255; b = 255; return; }
-	float ratio = (float)count / 64.0f;
-	r = static_cast<Uint8>(255.0f * ratio);
-	g = static_cast<Uint8>(150.0f + 55.0f * ratio);
-	b = static_cast<Uint8>(105.0f + 100.0f * ratio);
+	if (count > 63) { r = 0; g = 0; b = 0; }
+	else
+	{
+		float ratio = (float)count / 64.0f;
+		r = static_cast<Uint8>(100.0f + 255.0f * ratio);
+		g = static_cast<Uint8>(50.0f + 1000.0f / ratio);
+		b = static_cast<Uint8>(55.0f + 100.0f * ratio);
+	}
 }
