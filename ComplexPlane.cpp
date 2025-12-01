@@ -41,15 +41,24 @@ void ComplexPlane::updateRender()
 }
 void ComplexPlane::zoomIn()
 {
-	m_zoomCount;
+	m_zoomCount++;
+	float x = (float)BASE_WIDTH * (pow(BASE_ZOOM, m_zoomCount));
+	float y = (float)BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
+	m_plane_size = Vector2f(x, y);
+	m_state = State::CALCULATING;
 }
 void ComplexPlane::zoomOut()
 {
+	m_zoomCount--;
+	float x = BASE_WIDTH * (pow(BASE_ZOOM, m_zoomCount));
+	float y = BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
+	m_plane_size = Vector2f(x, y);
+	m_state = State::CALCULATING;
 }
-void ComplexPlane::setCenter(Vector2i mousePixel)
+void ComplexPlane::setCenter(Vector2i pixel)
 {
-	m_plane_center.x = static_cast<float>(mousePixel.x);
-	m_plane_center.y = static_cast<float>(mousePixel.y);
+	m_plane_center = mapPixelToCoords(pixel);
+	m_state = State::CALCULATING;
 }
 void ComplexPlane::setMouseLocation(Vector2i mousPixel)
 {
@@ -67,18 +76,16 @@ void ComplexPlane::loadText(Text& text)
 }
 size_t ComplexPlane::countIterations(Vector2f coord)
 {
-	float x, y, reTemp;
-	int iterations;
-	x = 0; y = 0;
-	iterations = 0;
-
-	while (x * x + y * y < 4 && iterations < MAX_ITER) {
-		reTemp = x * x - y * y + coord.x;
-		y = 2 * x * y + coord.y;
-		x = reTemp;
-		iterations++;
+	complex<double> c(coord.x, coord.y);
+	complex<double> z = c;
+	
+	int i = 0;
+	while (abs(z) < 2.0 && i < MAX_ITER)
+	{
+		z = z * z + c;
+		i++;
 	}
-	return iterations;
+	return i;
 }
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
