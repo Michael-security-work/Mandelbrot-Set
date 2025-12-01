@@ -25,6 +25,7 @@ int main()
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed) window.close();
+			if (Keyboard::isKeyPressed(Keyboard::Escape)) window.close();
 			
 			if(event.type == Event::MouseButtonPressed)
 			{
@@ -41,8 +42,6 @@ int main()
 			{
 				
 			}
-			
-			if (Keyboard::isKeyPressed(Keyboard::Escape)) window.close();
 		}
 		///Update
 		plane.updateRender();
@@ -55,6 +54,5 @@ int main()
 		window.draw(text);
 		
 		window.display();
-
 	} 
 }

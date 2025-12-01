@@ -12,7 +12,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 	m_vArray.setPrimitiveType(Points);
 	m_vArray.resize(pixelWidth * pixelHeight);
 }
-Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
+Vector2f ComplexPlane::mapPixelToCoords(Vector2i pixel)
 {
 	
 	return Vector2f(0.f, 0.f);
@@ -65,5 +65,9 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 }
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
-	
+	if (count > 63) { r = 255; g = 255; b = 255; return; }
+	float ratio = (float)count / 64.0f;
+	r = static_cast<Uint8>(255.0f * ratio);
+	g = static_cast<Uint8>(150.0f + 55.0f * ratio);
+	b = static_cast<Uint8>(105.0f + 100.0f * ratio);
 }
