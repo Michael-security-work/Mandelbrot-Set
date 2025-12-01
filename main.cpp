@@ -25,22 +25,17 @@ int main()
 		{
 			if (event.type == Event::Closed) window.close();
 			if (Keyboard::isKeyPressed(Keyboard::Escape)) window.close();
-			
-			if(event.type == Event::MouseButtonPressed)
+
+			if (event.type == Event::MouseButtonPressed)
 			{
-				if (event.mouseButton.button == Mouse::Left)
-				{
-					plane.zoomIn();
-					plane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.x));
-				}
-				else if (event.mouseButton.button == Mouse::Right)
-				{
-					plane.zoomOut();
-				}
+				plane.setCenter(Vector2i(event.mouseButton.x, event.mouseButton.y));
+				if (event.mouseButton.button == Mouse::Left) plane.zoomIn();
+				else if (event.mouseButton.button == Mouse::Right) plane.zoomOut();
 			}
+
 			if (event.type == Event::MouseMoved)
 			{
-				plane.setMouseLocation(Vector2i(event.mouseMove.x, event.mouseMove.x));
+				plane.setMouseLocation(Vector2i(event.mouseMove.x, event.mouseMove.y));
 			}
 		}
 		///Update

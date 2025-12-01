@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <complex>
+#include <thread>
 #include <vector>
 #include <sstream>
 
@@ -37,6 +38,7 @@ class ComplexPlane : public Drawable
 		ComplexPlane(int pixelWidth, int pixelHeight);
 		void draw(RenderTarget& target, RenderStates states) const;
 		void updateRender();
+		void updateRow(int row);
 		void zoomIn();
 		void zoomOut();
 		void setCenter(Vector2i mousePixel);
